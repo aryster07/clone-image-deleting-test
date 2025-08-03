@@ -23,14 +23,7 @@
     "axios": "^1.5.0",
     "jimp": "^0.22.0",
     "trash": "^8.1.1",
-    "crypto": "^1.0.1",
-    "aws-sdk": "^2.1400.0",
-    "@azure/cognitiveservices-computervision": "^8.2.0",
-    "@google-cloud/vision": "^4.0.0",
-    "dotenv": "^16.3.1",
-    "opencv4nodejs": "^5.6.0",
-    "tensorflow": "^4.10.0",
-    "@tensorflow/tfjs-node": "^4.10.0"
+    "dotenv": "^16.3.1"
   },
   "build": {
     "appId": "com.duplicateimagedetector.app",

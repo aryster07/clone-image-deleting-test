@@ -2,8 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs-extra');
 const { scanFolder } = require('./scanner/fileScanner');
-const { detectDuplicates } = require('./detection/aiDetectionEnterprise');
-const { deleteFiles } = require('./deletion/deletionManager');
+const { detectDuplicates } = require('./detection/aiDetectionSimplified');
+const { deleteFiles } = require('./deletion/deletionManagerSimple');
 const DataSafetyManager = require('./safety/dataSafetyManager');
 
 let mainWindow;

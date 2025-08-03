@@ -1,6 +1,15 @@
-const trash = require('trash');
 const fs = require('fs-extra');
 const path = require('path');
+
+// Dynamic import for ES module
+let trashModule = null;
+
+async function getTrashModule() {
+  if (!trashModule) {
+    trashModule = await import('trash');
+  }
+  return trashModule.default;
+}
 
 async function deleteFiles(filesToDelete, progressCallback) {
   const results = {
@@ -10,6 +19,9 @@ async function deleteFiles(filesToDelete, progressCallback) {
   };
   
   let processed = 0;
+  
+  // Get the trash module dynamically
+  const trash = await getTrashModule();
   
   for (const filePath of filesToDelete) {
     try {
