@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicate Image Detector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Duplicate Image Detector</h1>
+            <p>AI-powered duplicate image detection and deletion tool</p>
+        </header>
+
+        <main>
+            <!-- Step 1: Folder Selection -->
+            <section id="folder-selection" class="step active">
+                <h2>Step 1: Select Folder</h2>
+                <div class="folder-selector">
+                    <button id="select-folder-btn" class="primary-btn">
+                        📁 Select Folder to Scan
+                    </button>
+                    <div id="selected-folder" class="folder-path"></div>
+                </div>
+            </section>
+
+            <!-- Step 2: Scanning Progress -->
+            <section id="scanning" class="step">
+                <h2>Step 2: Scanning Images</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="scan-progress" class="progress-fill"></div>
+                    </div>
+                    <div id="scan-status" class="progress-text">Ready to scan...</div>
+                    <div id="scan-details" class="progress-details"></div>
+                </div>
+                <button id="start-scan-btn" class="primary-btn" disabled>
+                    🔍 Start Scanning
+                </button>
+            </section>
+
+            <!-- Step 3: AI Detection -->
+            <section id="detection" class="step">
+                <h2>Step 3: Enterprise AI Duplicate Detection</h2>
+                <div class="ai-providers">
+                    <h3>AI Providers Status</h3>
+                    <div class="provider-status">
+                        <div class="provider" id="google-status">
+                            <span class="provider-icon">🔍</span>
+                            <span class="provider-name">Google Vision AI</span>
+                            <span class="status-indicator" id="google-indicator">⏳</span>
+                        </div>
+                        <div class="provider" id="azure-status">
+                            <span class="provider-icon">🧠</span>
+                            <span class="provider-name">Azure Computer Vision</span>
+                            <span class="status-indicator" id="azure-indicator">⏳</span>
+                        </div>
+                        <div class="provider" id="aws-status">
+                            <span class="provider-icon">☁️</span>
+                            <span class="provider-name">AWS Rekognition</span>
+                            <span class="status-indicator" id="aws-indicator">⏳</span>
+                        </div>
+                        <div class="provider" id="local-status">
+                            <span class="provider-icon">💻</span>
+                            <span class="provider-name">Local Advanced</span>
+                            <span class="status-indicator" id="local-indicator">✅</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="detection-progress" class="progress-fill"></div>
+                    </div>
+                    <div id="detection-status" class="progress-text">Ready for enterprise AI detection...</div>
+                    <div id="detection-details" class="progress-details">
+                        <div id="confidence-level"></div>
+                        <div id="current-provider"></div>
+                    </div>
+                </div>
+                <button id="start-detection-btn" class="primary-btn" disabled>
+                    🤖 Start Enterprise AI Detection
+                </button>
+            </section>
+
+            <!-- Step 4: Results and Deletion -->
+            <section id="results" class="step">
+                <h2>Step 4: Review and Delete Duplicates</h2>
+                
+                <div class="results-summary">
+                    <div id="duplicate-stats" class="stats-card">
+                        <h3>Detection Results</h3>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-number" id="total-groups">0</span>
+                                <span class="stat-label">Duplicate Groups</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="total-duplicates">0</span>
+                                <span class="stat-label">Duplicate Images</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="space-to-save">0 MB</span>
+                                <span class="stat-label">Space to Save</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-actions">
+                        <button id="select-all-btn" class="secondary-btn">
+                            ☑️ Select All Groups
+                        </button>
+                        <button id="delete-selected-btn" class="danger-btn" disabled>
+                            🗑️ Safely Delete Selected Duplicates
+                        </button>
+                        <button id="emergency-stop-btn" class="emergency-btn">
+                            🚨 Emergency Stop
+                        </button>
+                    </div>
+                    
+                    <div class="safety-info">
+                        <h4>🛡️ Safety Features Active</h4>
+                        <ul>
+                            <li>✅ Pre-analysis backup created</li>
+                            <li>✅ Multi-provider AI consensus (92%+ similarity required)</li>
+                            <li>✅ Full file backup before deletion</li>
+                            <li>✅ Recycle bin integration</li>
+                            <li>✅ One-click restore available</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="duplicate-groups" class="duplicate-groups-container">
+                    <!-- Duplicate groups will be dynamically populated here -->
+                </div>
+            </section>
+
+            <!-- Step 5: Deletion Progress -->
+            <section id="deletion" class="step">
+                <h2>Step 5: Deleting Files</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="deletion-progress" class="progress-fill"></div>
+                    </div>
+                    <div id="deletion-status" class="progress-text">Ready to delete...</div>
+                    <div id="deletion-details" class="progress-details"></div>
+                </div>
+                <div id="deletion-results" class="deletion-results hidden">
+                    <h3>Deletion Complete</h3>
+                    <div class="results-summary">
+                        <div class="stat">
+                            <span class="stat-number" id="deleted-count">0</span>
+                            <span class="stat-label">Files Deleted</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="failed-count">0</span>
+                            <span class="stat-label">Failed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="space-freed">0 MB</span>
+                            <span class="stat-label">Space Freed</span>
+                        </div>
+                    </div>
+                    <button id="start-over-btn" class="primary-btn">
+                        🔄 Start Over
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
